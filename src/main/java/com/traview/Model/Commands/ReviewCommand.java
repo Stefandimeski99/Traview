@@ -2,6 +2,7 @@ package com.traview.Model.Commands;
 
 import com.traview.Model.Entities.Destination;
 import com.traview.Model.Entities.User;
+
 import java.util.Date;
 
 public class ReviewCommand {

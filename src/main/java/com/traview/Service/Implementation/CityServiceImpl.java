@@ -6,8 +6,11 @@ import com.traview.Model.Entities.City;
 import com.traview.Repository.CityRepository;
 import com.traview.Service.CityService;
 import com.traview.Utils.ObjectMapperUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import java.util.List;
+
+import java.util.Optional;
 
 @Service
 public class CityServiceImpl implements CityService {
@@ -19,13 +22,14 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
-    public List<CityDto> getCities() {
-        return ObjectMapperUtils.mapAll(this.cityRepository.findAll(), CityDto.class);
+    public Optional<Page<City>> getCities(Pageable pageable) {
+        return Optional.of(this.cityRepository.findAll(pageable));
     }
 
     @Override
-    public CityDto insertCity(CityCommand cityCommand) {
+    public Optional<CityDto> insertCity(CityCommand cityCommand) {
         City cityEntity = this.cityRepository.save(ObjectMapperUtils.map(cityCommand, City.class));
-        return ObjectMapperUtils.map(cityEntity, CityDto.class);
+        CityDto cityDto = ObjectMapperUtils.map(cityEntity, CityDto.class);
+        return Optional.of(cityDto);
     }
 }

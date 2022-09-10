@@ -1,9 +1,7 @@
 package com.traview.Model.Commands;
 
-import com.traview.Model.Entities.Review;
+import com.traview.Model.Enums.UserRole;
 import lombok.Data;
-import org.springframework.lang.Nullable;
-import java.util.List;
 
 @Data
 public class UserCommand {
@@ -11,11 +9,20 @@ public class UserCommand {
     String username;
     String password;
     String surname;
+    String email;
+    UserRole userRole;
+    boolean locked;
+    boolean enabled;
 
-    public UserCommand(String name, String username, String password, String surname) {
+    public UserCommand() {
+    }
+
+    public UserCommand(String name, String username, String password, String surname, String email, UserRole userRole) {
         this.name = name;
         this.username = username;
         this.password = password;
         this.surname = surname;
+        this.email = email;
+        this.userRole = userRole;
     }
 }

@@ -1,22 +1,22 @@
 package com.traview.Model.Dtos;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.traview.Model.Entities.Country;
+import com.traview.Model.Entities.Destination;
+import lombok.Data;
 
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 public class CityDto {
     Long id;
-    CountryDto country;
-    List<DestinationDto> destinations;
+    Country country;
+    List<Destination> destinations;
     String name;
 
     public CityDto() {
     }
 
-    public CityDto(Long id, CountryDto country, List<DestinationDto> destinations, String name) {
+    public CityDto(Long id, Country country, List<Destination> destinations, String name) {
         this.id = id;
         this.country = country;
         this.destinations = destinations;

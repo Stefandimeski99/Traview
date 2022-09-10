@@ -1,18 +1,21 @@
 package com.traview.Model.Dtos;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.traview.Model.Entities.City;
+import com.traview.Model.Entities.Review;
+import lombok.Data;
+
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 public class DestinationDto {
-
     Long id;
-
-    CityDto city;
-
-    List<ReviewDto> reviews;
-
+    City city;
+    List<Review> reviews;
     String name;
+
+    public DestinationDto(City city, List<Review> reviews, String name) {
+        this.city = city;
+        this.reviews = reviews;
+        this.name = name;
+    }
 }

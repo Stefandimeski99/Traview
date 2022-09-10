@@ -6,9 +6,11 @@ import com.traview.Model.Entities.Destination;
 import com.traview.Repository.DestinationRepository;
 import com.traview.Service.DestinationService;
 import com.traview.Utils.ObjectMapperUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DestinationServiceImpl implements DestinationService {
@@ -20,8 +22,8 @@ public class DestinationServiceImpl implements DestinationService {
     }
 
     @Override
-    public List<DestinationDto> getDestinations() {
-        return ObjectMapperUtils.mapAll(this.destinationRepository.findAll(), DestinationDto.class);
+    public Optional<Page<Destination>> getDestinations(Pageable pageable) {
+        return Optional.of(this.destinationRepository.findAll(pageable));
     }
 
     @Override

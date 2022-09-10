@@ -2,6 +2,7 @@ package com.traview.Model.Entities;
 
 import lombok.Getter;
 import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -12,13 +13,10 @@ public class City {
     @Id
     @GeneratedValue
     Long id;
-
     @ManyToOne
     Country country;
-
     @OneToMany(mappedBy = "city")
     List<Destination> destinations;
-
     String name;
 
     public City() {

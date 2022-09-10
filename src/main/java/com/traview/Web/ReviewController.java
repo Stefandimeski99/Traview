@@ -2,6 +2,7 @@ package com.traview.Web;
 
 import com.traview.Model.Commands.ReviewCommand;
 import com.traview.Service.ReviewService;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,8 +17,10 @@ public class ReviewController {
     }
 
     @GetMapping
-    public ResponseEntity getAllReviews() {
-        return ResponseEntity.ok(this.reviewService.getReviews());
+    public ResponseEntity getAllReviews(Pageable pageable) {
+        return this.reviewService.getReviews(pageable)
+                .map(reviews -> ResponseEntity.ok(reviews))
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping

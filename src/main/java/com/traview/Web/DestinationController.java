@@ -2,6 +2,7 @@ package com.traview.Web;
 
 import com.traview.Model.Commands.DestinationCommand;
 import com.traview.Service.DestinationService;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,8 +17,10 @@ public class DestinationController {
     }
 
     @GetMapping
-    public ResponseEntity getAllDestinations() {
-        return ResponseEntity.ok(this.destinationService.getDestinations());
+    public ResponseEntity getAllDestinations(Pageable pageable) {
+        return this.destinationService.getDestinations(pageable)
+                .map(destinations -> ResponseEntity.ok(destinations))
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping

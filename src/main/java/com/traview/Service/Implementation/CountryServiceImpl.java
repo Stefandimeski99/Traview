@@ -6,9 +6,11 @@ import com.traview.Model.Entities.Country;
 import com.traview.Repository.CountryRepository;
 import com.traview.Service.CountryService;
 import com.traview.Utils.ObjectMapperUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CountryServiceImpl implements CountryService {
@@ -20,8 +22,8 @@ public class CountryServiceImpl implements CountryService {
     }
 
     @Override
-    public List<CountryDto> getCountries() {
-        return ObjectMapperUtils.mapAll(this.countryRepository.findAll(), CountryDto.class);
+    public Optional<Page<Country>> getCountries(Pageable pageable) {
+        return Optional.of(this.countryRepository.findAll(pageable));
     }
 
     @Override
